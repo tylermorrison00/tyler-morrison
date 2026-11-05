@@ -65,7 +65,7 @@
     position:absolute; z-index:2; left:50%; top:31%;
     transform:translate(-50%,-50%);
     font-family:"Playfair Display", serif; font-weight:800;
-    font-size:clamp(5rem, 16.5vw, 19rem); line-height:1; letter-spacing:.03em;
+    font-size:clamp(2.6rem, 9vw, 10.5rem); line-height:1; letter-spacing:.03em;
     color:rgba(255,255,255,.30);
     -webkit-text-stroke:2px rgba(255,255,255,.7);
     pointer-events:none; user-select:none; white-space:nowrap;
@@ -100,13 +100,25 @@
   }
   .nav-links{
     position:absolute; left:50%; transform:translateX(-50%);
-    display:flex; gap:32px;
+    display:flex; align-items:center; gap:4px;
+    /* same frosted-glass pill as the Active Users chip */
+    background:rgba(255,255,255,.32); border:1px solid rgba(255,255,255,.6);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    padding:7px 9px; border-radius:999px;
+    box-shadow:var(--shadow-sm);
+    opacity:0; /* hidden until the bird lands, then the pill animates in too */
+  }
+  .hero.landed .nav-links{ animation:navPillIn .85s cubic-bezier(.2,.7,.25,1) .3s forwards; }
+  @keyframes navPillIn{
+    from{ opacity:0; transform:translate(-50%, -44px); }
+    to{ opacity:1; transform:translate(-50%, 0); }
   }
   .nav-links a{
-    color:#33536d; text-decoration:none; font-weight:600; font-size:.83rem;
-    padding:4px 2px;
+    color:#17384f; text-decoration:none; font-weight:700; font-size:.83rem;
+    padding:6px 13px; border-radius:999px; white-space:nowrap;
+    transition:background .18s ease, color .18s ease;
   }
-  .nav-links a:hover{ color:var(--ink); }
+  .nav-links a:hover{ color:var(--ink); background:rgba(255,255,255,.55); }
   .resources{
     margin-left:auto;
     background:#fff; color:#17384f; text-decoration:none;
@@ -389,7 +401,7 @@
     .hero-video{ position:absolute; }
     .hero-nav{ padding:14px 16px; }
     .nav-links{ display:none; }
-    .giant{ top:9%; font-size:18vw; -webkit-text-stroke-width:1.3px; }
+    .giant{ top:9%; font-size:9.5vw; -webkit-text-stroke-width:1.2px; }
     .hero-shade{
       background:
         linear-gradient(100deg, rgba(10,45,75,.30), transparent 68%),
@@ -412,7 +424,7 @@
   }
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
-    .enter, .giant{ animation:none !important; opacity:1 !important; }
+    .enter, .giant, .nav-links{ animation:none !important; opacity:1 !important; }
     html{ scroll-behavior:auto; }
   }
 </style>
@@ -426,7 +438,7 @@
 
     <div class="hero-shade" aria-hidden="true"></div>
 
-    <div class="giant" aria-hidden="true">BLUEBIRD</div>
+    <div class="giant" aria-hidden="true">TYLER MORRISON</div>
 
     <div class="hero-nav enter enter-t" style="--d:.15s">
       <!-- The logo is the only key to the private vault: press & hold it. -->
